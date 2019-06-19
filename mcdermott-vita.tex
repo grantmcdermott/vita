@@ -1,0 +1,615 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Simple LaTeX CV Template %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% NOTE: If you find that it says                                     %%
+%%                                                                    %%
+%%                           1 of ??                                  %%
+%%                                                                    %%
+%% at the bottom of your first page, this means that the AUX file     %%
+%% was not available when you ran LaTeX on this source. Simply RERUN  %%
+%% LaTeX to get the ``??'' replaced with the number of the last page  %%
+%% of the document. The AUX file will be generated on the first run   %%
+%% of LaTeX and used on the second run to fill in all of the          %%
+%% references.                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't like 10pt? Try 11pt or 12pt
+\documentclass[10pt]{article}
+\RequirePackage[T1]{fontenc}
+
+% LaTeX will typeset using Computer Modern Roman, which a lot of
+% non-mathematicians and non-engineers won't like. Also, a few PDF
+% viewers may not render CMR very well. Instead, Times New Roman can
+% be used. That's what this package does.
+%\usepackage{times}
+\usepackage{mathpazo}
+
+% The automated optical recognition software used to digitize resume
+% information works best with fonts that do not have serifs. This
+% command uses a sans serif font throughout. Uncomment both lines (or at
+% least the second) to restore a Roman font (i.e., a font with serifs).
+% (NOTE: This requires the times package above)
+%\renewcommand{\familydefault}{\sfdefault}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+
+% This package helps LaTeX auto-hyphenate hyphenated words if you use
+% special hyphens. For example, bio\-/mimicry will properly hyphenate
+% ``mimicry'' if necessary.
+\usepackage[shortcuts]{extdash}
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+%% Use these lines for letter-sized paper
+\usepackage[paper=letterpaper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=1in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=1in,               % 1 inch margins
+            includemp]{geometry}
+
+%% Use these lines for A4-sized paper
+%\usepackage[paper=a4paper,
+%            %includefoot, % Uncomment to put page number above margin
+%            marginparwidth=30.5mm,    % Length of section titles
+%            marginparsep=1.5mm,       % Space between titles and text
+%            margin=25mm,              % 25mm margins
+%            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+% Provides special list environments and macros to create new ones
+\usepackage[shortlabels]{enumitem}
+
+% Simpler bibsections for CV sections
+% (thanks to natbib for inspiration)
+%
+% * For lists of references with hanging indents and no numbers:
+%
+%   \begin{bibsection}
+%       \item ...
+%   \end{bibsection}
+%
+% * For numbered lists of references (with hanging indents):
+%
+%   \begin{bibenum}
+%       \item ...
+%   \end{bibenum}
+%
+%   Note that bibenum numbers continuously throughout. To reset the
+%   counter, use
+%
+%   \restartlist{bibenum}
+%
+%   at the place where you want the numbering to reset.
+
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newlist{bibsection}{itemize}{3}
+\setlist[bibsection]{label=,leftmargin=\bibhang,%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\newlist{bibenum}{enumerate}{3}
+\setlist[bibenum]{label=[\arabic*],resume,leftmargin={\bibhang+\widthof{[999]}},%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\let\oldendbibenum\endbibenum
+\def\endbibenum{\oldendbibenum\vspace{-.6\baselineskip}}
+\let\oldendbibsection\endbibsection
+\def\endbibsection{\oldendbibsection\vspace{-.6\baselineskip}}
+\makeatother
+
+%% Reference the last page in the page number
+%
+% NOTE: comment the +LP line and uncomment the -LP line to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers (make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% GRM ADDED
+\usepackage{datetime}
+\newdateformat{monthyear}{\monthname[\THEMONTH] \THEYEAR}
+\newdateformat{daymonthyear}{\THEDAY{} \monthname[\THEMONTH] \THEYEAR}
+\usepackage{tabularx}
+\usepackage{fontawesome}
+\usepackage{fontspec}
+\setromanfont[Mapping={tex-text}, 
+Numbers={OldStyle},
+Ligatures={Common}]{Palatino Linotype}
+\setsansfont[Mapping=tex-text, Scale=1.25,
+%Ligatures={Common}, 
+Colour=AA0000]{YanoneKaffeesatz-Regular}%{Open Sans-Bold}
+\setmonofont[Mapping=tex-text]{inconsolata}	
+
+%% Custom hanging indent for vita items
+\def\ind{\hangindent=1 true cm \hangafter=1 \vspace{.5em} \noindent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% HEADING AT TOP OF CURRICULUM VITAE
+
+% The title (name) with a horizontal rule under it
+% (optional argument typesets an object right-justified across from name
+%  as well)
+%
+% Usage: \makeheading{name}
+%        OR
+%        \makeheading[right_object]{name}
+%
+% Place at top of document. It should be the first thing.
+% If ``right_object'' is provided in the square-braced optional
+% argument, it will be right justified on the same line as ``name'' at
+% the top of the CV. For example:
+%
+%       \makeheading[\emph{Curriculum vitae}]{Your Name}
+%
+% will put an emphasized ``Curriculum vitae'' at the top of the document
+% as a title. Likewise, a picture could be included:
+%
+%   \makeheading[{\includegraphics[height=1.5in]{my_picture}}]{Your Name}
+%
+% the picture will be flush right across from the name. For this example
+% to work, make sure the extra set of curly braces is included. Also
+% makes ure that \usepackage{graphicx} is somewhere in the preamble.
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {\LARGE \scshape #2 \hfill #1}\\[-0.15\baselineskip]%
+                 %\rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+%%% SECTION HEADINGS
+
+% The section headings. Flush left in small caps down pseudo-margin.
+%
+% Usage: \section{section name}
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    %\noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
+    \noindent\llap{\textsf{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+%%% LISTS
+
+% This macro alters a list by removing some of the space that follows the list
+% (is used by lists below)
+\newcommand*\fixendlist[1]{%
+    \expandafter\let\csname preFixEndListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixEndListend#1\endcsname\vspace{-0.6\baselineskip}}}
+
+% These macros help ensure that items in outer-type lists do not get
+% separated from the next line by a page break
+% (they are used by lists below)
+\let\originalItem\item
+\newcommand*\fixouterlist[1]{%
+    \expandafter\let\csname preFixOuterList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\def\item{\pagebreak[2]\oldItem}\csname preFixOuterList#1\endcsname}
+    \expandafter\let\csname preFixOuterListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\let\item\oldItem\csname preFixOuterListend#1\endcsname}}
+\newcommand*\fixinnerlist[1]{%
+    \expandafter\let\csname preFixInnerList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\let\item\originalItem\csname preFixInnerList#1\endcsname}
+    \expandafter\let\csname preFixInnerListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixInnerListend#1\endcsname\let\item\oldItem}}
+
+% An itemize-style list with lots of space between items
+%
+% Usage:
+%   \begin{outerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{outerlist}
+\newlist{outerlist}{itemize}{3}
+    \setlist[outerlist]{label=\enskip\textbullet,leftmargin=*}
+    \fixendlist{outerlist}
+    \fixouterlist{outerlist}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+%
+% Usage:
+%   \begin{lonelist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{lonelist}
+\newlist{lonelist}{itemize}{3}
+    \setlist[lonelist]{label=\enskip\textbullet,leftmargin=*,partopsep=0pt,topsep=0pt}
+    \fixendlist{lonelist}
+    \fixouterlist{lonelist}
+
+% An itemize-style list with little space between items
+%
+% Usage:
+%   \begin{innerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{innerlist}
+\newlist{innerlist}{itemize}{3}
+    \setlist[innerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixinnerlist{innerlist}
+
+% An environment IDENTICAL to innerlist that has better pre-list spacing
+% when used as the first thing in a \section
+%
+% Usage:
+%   \begin{loneinnerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{loneinnerlist}
+\newlist{loneinnerlist}{itemize}{3}
+    \setlist[loneinnerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixendlist{loneinnerlist}
+    \fixinnerlist{loneinnerlist}
+
+%%% EXTRA SPACE
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+%%% FORMATTING MACROS
+
+% Provides a linked \doi{#1} that links doi:#1 to http://dx.doi.org/#1
+\usepackage{doi}
+% To change the text before the DOI, adjust this command
+%\renewcommand\doitext{doi:}
+
+% Provides a linked \url{#1} that doesn't require escape characters
+\usepackage{url}
+
+% You can adjust the style \url{} uses here:
+% (options are: same, rm, sf, tt; defaults to tt)
+\urlstyle{same}
+
+% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
+% (uncomment to typeset the e\-/mail address in typewriter font;
+%  otherwise, will be typeset in the \urlstyle above)
+%\DeclareUrlCommand\emaillink{\urlstyle{tt}}
+\providecommand*\emaillink[1]{\nolinkurl{#1}}
+\providecommand*\email[1]{\href{mailto:#1}{\emaillink{#1}}}
+
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em \TeX}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+	
+\makeheading[\emph{Curriculum vitae}]{Grant R. McDermott}
+
+\section{contact}
+
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill} } l r}
+	\href{https://economics.uoregon.edu}{Department of Economics}, & +1 541 346 1334 \, \faPhone\\
+	Prince Lucien Campbell Hall, & \texttt{\href{http://twitter.com/grant\_mcdermott}{@grant\_mcdermott}} \, \faTwitter \\
+	1285 University of Oregon,  & \texttt{\href{mailto:grantmcd@uoregon.edu}{grantmcd@uoregon.edu}} \, \faEnvelope \\
+	Eugene, \textsc{OR} 97403-1285 & \texttt{\href{http://www.grantmcdermott.com}{www.grantmcdermott.com}} \, \faGlobe
+\end{tabular*}
+
+%% NOTE: Mind where the & separators and \\ breaks are in the following
+%%       table. Table is one row made up of three parboxes. The left
+%%       parbox has address info, the middle parbox has a vertical bar,
+%%       and the right parbox has phone and electronic contact
+%%       information.
+%%
+%% MACROS: \rcollength is the width of the right column of the table
+%%             (adjust it to your liking; default is 1.85in).
+%%         \spacewidth is width of area between left and right boxes.
+%%
+%\newlength{\rcollength}\setlength{\rcollength}{1.85in}%
+%\newlength{\spacewidth}\setlength{\spacewidth}{18pt}
+%%
+%\begin{tabular}[t]{@{}p{\textwidth-\rcollength-\spacewidth}@{}p{\spacewidth}@{}p{\rcollength}}%
+%%
+%% Address box
+%\parbox{\textwidth-\rcollength-\spacewidth}{%
+%	\href{https://economics.uoregon.edu}{Department of Economics}, \\ Prince Lucien Campbell Hall, \\ 1285 University of Oregon, \\ Eugene, \textsc{OR} 97403-1285
+%}
+%%
+%&
+%% Uncomment to add a vertical bar in middle of contact information
+%%{\vrule width 0.5pt}
+%\parbox[m][5\baselineskip]{\spacewidth}{} &
+%%
+%% Non-snail-mail contact information
+%\parbox{\rcollength}{%
+%+1-805-895-7480 \, \faPhone\\
+%\texttt{\href{http://twitter.com/grant\_mcdermott}{@grant\_mcdermott}} \, \faTwitter \\
+%\texttt{\href{mailto:grantmcd@uoregon.edu}{grantmcd@uoregon.edu}} \, \faEnvelope \\
+%\texttt{\href{http://www.grantmcdermott.com}{www.grantmcdermott.com}} \, \faGlobe
+%}
+%%
+%\end{tabular}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% APPOINTMENTS
+
+\section{appointments}
+
+Assistant Professor of Economics, University of Oregon, 2017--Present.\\
+Postdoctoral Scholar, University of California Santa Barbara, 2015--2017.
+%\begin{tabularx}{\linewidth}{X r}
+%	Assistant Professor of Economics, University of Oregon & 2017--Present\\
+%	Postdoctoral Scholar, University of California Santa Barbara & 2015--2017
+%\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% EDUCATION
+
+\section{education}
+
+Ph.D., Economics, Norwegian School of Economics, 2015.\\
+%\ind \footnotesize Dissertation: \emph{Water. Energy. Climate. Essays in empirical environmental economics.}\normalsize \\ \vspace{-1.5em}
+%
+M.Sc., Economics \& Business Administration, Norwegian School of Economics, 2011.\\% GPA: A
+M.Sc., International Management, CEMS, 2011. \\% GPA: A\\%double degree taken at NHH and Nova School of Business and Economics (Lisbon), GPA: A\\
+B.Com. (Hons.), Economics, University of Cape Town, 2005.\\
+B.Bus.Sc., Marketing, University of Cape Town, 2004.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% RESEARCH
+
+\section{research}
+
+\emph{Fields and interests} 
+
+\ind Environmental and natural resource economics. Applied econometrics and data science. Uncertainty and Bayesian learning.
+
+\blankline
+
+\emph{Journal articles}
+
+\ind ``\href{https://doi.org/10.1073/pnas.1818687115}{Alternate explanations for the blue paradox do not withstand statistical scrutiny.}'' With K.C. Meng, G.G. McDonald, and C.J. Costello. \textit{\textbf{Proceedings of the National Academy of Sciences}}, 115 (52) E12124--E12125, 26 December 2018.
+
+\ind ``\href{http://dx.doi.org/10.1073/pnas.1802862115}{The blue paradox: Preemptive overfishing in marine reserves.}'' With K.C. Meng, G.G. McDonald, and C.J. Costello. \textit{\textbf{Proceedings of the National Academy of Sciences}}, 116 (12) 5319--5325, 19 March 2019.
+
+\ind ``\href{http://dx.doi.org/10.1126/science.aao4248}{Protecting marine mammals, turtles and birds by rebuilding global fisheries.}'' With M.G. Burgess, B. Owashi, L.E. Peavey, T. Clavelle, D. Ovando, B.P. Wallace, R.L. Lewison, S.D. Gaines, and C.J. Costello.
+\textit{\textbf{Science}}, 359(6381), 1255--1258, 16 March 2018.
+
+
+\ind ``\href{http://dx.doi.org/10.1016/j.marpol.2016.12.005}{Five rules for pragmatic blue growth.}'' With %Matthew G. Burgess \emph{et al.}, 
+M.G. Burgess, M. Clemence, S.D. Gaines, and C.J. Costello.
+\textbf{\textit{Marine Policy}}, 87(2018) 331--339, January 2018.
+
+%\vspace{.5em}
+\ind  ``\href{http://dx.doi.org/10.1093/biosci/biv147}{Resolving Disputes over Ocean Calamities.}'' With M.G. Burgess. \textbf{\textit{BioScience}}, 65(12), 1115--1116, 1 December 2015.
+
+\ind  ``\href{http://dx.doi.org/10.3368/le.90.1.131}{Electricity Prices, River Temperatures and Cooling Water Scarcity.}'' With \O.A. Nilsen. \textbf{\textit{Land Economics}}, 90(1), 131--148, 1 February 2014.
+
+%\begin{bibenum}
+%    \item ``\href{http://dx.doi.org/10.1016/j.marpol.2016.12.005}{Five rules for pragmatic blue growth.}'' With %Matthew G. Burgess \emph{et al.}, 
+%    M.G. Burgess, M. Clemence, S.D. Gaines, and C.J. Costello.
+%    \textbf{\textit{Marine Policy}}, In Press.
+%    
+%    %\vspace{.5em}
+%    \item  ``\href{http://dx.doi.org/10.1093/biosci/biv147}{Resolving Disputes over Ocean Calamities.}'' With M.G. Burgess. \textbf{\textit{BioScience}}, 65(12), 1115--1116, 1 December 2015.
+%\end{bibenum}
+
+\blankline
+
+\emph{Working papers}
+
+%\vspace{.5em}
+\ind ``\href{https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing}{Sceptic priors and climate consensus.}''
+
+%\vspace{.5em}
+\ind ``\href{https://drive.google.com/file/d/0B6AgOxtQA9dTaWcxdHpsNE5wdjA/view?usp=sharing}{Hydro power. Market might.}''
+
+\blankline
+
+\emph{Selected works in progress}
+
+%\vspace{.5em}
+\ind ``The value of mass information: Search in the Google era.'' With C.J. Costello and M.B. Ward.
+
+\blankline
+
+\emph{Report chapters}
+	
+	\ind ``South Africa Compliance Analysis.'' With J. Morrissey and D. Mendelsohn, in ``\href{http://www.g8.utoronto.ca/oxford/2006compliance-ox.pdf}{Governing Global Climate Change: St Petersburg Compliance Report for the `G8 Plus Five' Countries}'', M. Banda and J. Langille (eds.), G8 Final Compliance Report 2007, Oxford: G8 Research Group Oxford, 1 June 2007. xiii + 190 pp.
+	
+	%\vspace{.5em}
+	\ind ``\href{http://www.saldru.uct.ac.za/home/index.php?/component/option,com_docman/Itemid,37/gid,294/task,doc_view/}{The Current Status of the EPWP (Infrastructure) in the Western Cape}.'' With A. McCord, K. Adonis and L. Van Dongen. Prepared for the Western Cape Provincial Treasury \& Department of Transport And Public Works CAPE. Public Works Research Project, SALDRU, UCT, 24 March 2006.
+
+% Add a little space to nudge next ``Conference Publications'' marginpar
+% down to make room for tall ``Submitted Conference Publications''
+% marginpar. If there are enough submitted journal publications, this
+% space will not be needed (and should be removed).
+%\vspace{0.1in}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SEMINARS AND CONFERENCES 
+
+%\section{invited talks and conference presentations}
+\section{talks}
+
+%\textit{Including scheduled. }\\\\
+\begin{tabularx}{\linewidth}{l X }
+	2018	& University of Hawaii at Manoa; UCSB Occasional Workshop; Oregon Institute of Marine Biology \\
+	2017	& UCSB Occasional Workshop; Oregon State University; Association of Environmental and Resource Economists (AERE) Summer Conference (pre-conference workshop)\\%;  Google Earth Engine User Summit (GEEUS) \\
+	2016	& AERE Summer Conference\\%;  GEEUS \\
+	2015	& Econometric Applications in Climatology Workshop\\
+	2014	& World Congress of Environmental and Resource Economists (WCERE) \\
+	2013	& Nordic Econometric Meeting (NEM); Bergen Economics of Energy \& Environment Research (BEEER) \\ %NHH-UiB (University of Bergen) PhD Workshop;
+	2012	& Norwegian National Research School in Business Economics \& Administration (NFB) conference; International Energy Workshop; BEEER \\ %The Econometric Game; NHH-UiB PhD Workshop \\
+	2011	&	NEM 
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% GRANTS AND SCHOLARSHIPS
+
+%\section{grants and scholarships}
+\section{grants}
+
+CenSES (Research Council of Norway \#209697), 2018
+
+Professor Wilhelm Keilhaus Memorial Fund, 2014--2015
+
+Norges Bank fund for economic research, 2014--2015
+
+NHH PhD Research Scholarship, 2011--2015
+
+Norwegian Government Scholarship, 2009--2011
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TEACHING 
+
+\section{teaching}
+
+\begin{tabularx}{\linewidth}{l X }
+	Ph.D.	& Data Science for Economists (EC 607) \\
+	B.Sc.	& Environmental Economics (EC 434/534), Intermediate Microeconomic Theory (EC 311) \\
+%			& \textit{Undergraduate:} Environmental Economics (EC 434/534) \\
+%	& Guest lecturer for \href{http://www.bren.ucsb.edu/academics/documents/ESM242Syllabus_Costello.pdf}{Natural Resource Economics \& Policy (ESM 242)}. \\
+%			& Teaching assistant and occasional lecturer for various Master-level courses at NHH, including \href{https://www.nhh.no/en/courses/petroleum-economics/}{Petroleum Economics (ECN420)}, \href{https://www.nhh.no/en/courses/econometric-techniques/}{Econometric Techniques (ECO402)}, and \href{https://www.nhh.no/en/courses/empirical-strategies-for-causal-analysis/}{Econometric Analysis and Applications (ECO433)}. \\
+	%2008 				& External examiner, \href{http://www.e4sd.org}{Energy for %Sustainable Development}, Lund University. \\
+	%2005 				& Tutor for undergraduate economics courses, UCT.
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PROFESSIONAL SERVICE 
+
+%\section{professional service}
+\section{service}
+
+\emph{Refereeing}
+
+\ind Energy Economics; Energy Policy; Journal of Environmental Economics and Management; Marine Policy; Natural Resource Modeling; Water Resources Research
+
+\blankline
+
+\emph{Recruitment}
+
+\ind UO junior faculty search (2017/18)
+
+\blankline
+
+\emph{Conferences}
+
+\ind TWEEDS organising committee (\href{https://tweeds.io/}{tweeds.io})
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% OUTSIDE ACADEMIA 
+
+\section{non-academia}
+
+%\begin{tabularx}{\linewidth}{l X r}
+%	2017  & Lotic Labs, \textit{Consultant} & United States \\
+%	2009 	& NKC Independent Economists, \textit{Economist} & South Africa \\
+%	2008 	& Millennium Cycle for Change, \textit{Expedition member} & Trans-Africa		\\
+%	2007 	& IBM Global Financing, \textit{Field sales executive} & United Kingdom	\\
+%	2006	&	South Africa Labour Development Research Unit, \textit{Researcher} & South Africa
+%\end{tabularx}
+\begin{tabularx}{\linewidth}{l X}
+	2017  	& Lotic Labs, \textit{Consultant}, United States \\
+	2009 	& NKC Independent Economists, \textit{Economist}, South Africa \\
+	2008 	& Millennium Cycle for Change, \textit{Expedition member}, Cairo to Cape Town		\\
+	2007 	& IBM Global Financing, \textit{Field sales executive}, United Kingdom	\\
+	2006	&	South Africa Labour Development Research Unit, \textit{Researcher}, South Africa
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SOFTWARE
+
+\section{software}
+
+\vspace{-0.5em}
+\ind \textit{R}, Stata, Git(Hub), GIS, Python, SQL, Bash, some JavaScript and Julia. Various products within the Google Cloud Platform for handling and analysing big data (BigQuery, Compute Engine, Earth Engine, etc.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%	LAST UPDATED
+
+\vspace{0.25in} 
+%\begin{center}\textsc{Last updated: \today} \end{center} 
+\begin{center}\textsc{Last updated: \monthyear\today} \end{center} 
+
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------%
+% The following is copyright and licensing information for
+% redistribution of this LaTeX source code; it also includes a liability
+% statement. If this source code is not being redistributed to others,
+% it may be omitted. It has no effect on the function of the above code.
+%----------------------------------------------------------------------%
+% Copyright (c) 2007, 2008, 2009, 2010, 2011 by Theodore P. Pavlic
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+%----------------------------------------------------------------------%
