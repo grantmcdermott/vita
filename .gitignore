@@ -1,0 +1,14 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+**/*.aux
+**/*.bbl
+**/*.blg
+**/*.log
+**/*.nav
+**/*.out
+**/*.synctex.gz
+**/*.toc
+**/*.snm
