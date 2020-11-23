@@ -21,13 +21,6 @@
 \documentclass[10pt]{article}
 \RequirePackage[T1]{fontenc}
 
-% LaTeX will typeset using Computer Modern Roman, which a lot of
-% non-mathematicians and non-engineers won't like. Also, a few PDF
-% viewers may not render CMR very well. Instead, Times New Roman can
-% be used. That's what this package does.
-%\usepackage{times}
-\usepackage{mathpazo}
-
 % The automated optical recognition software used to digitize resume
 % information works best with fonts that do not have serifs. This
 % command uses a sans serif font throughout. Uncomment both lines (or at
@@ -171,18 +164,22 @@
 \newdateformat{monthyear}{\monthname[\THEMONTH] \THEYEAR}
 \newdateformat{daymonthyear}{\THEDAY{} \monthname[\THEMONTH] \THEYEAR}
 \usepackage{tabularx}
-\usepackage{fontawesome}
+%% FONTS
 \usepackage{fontspec}
-\setromanfont[Mapping={tex-text}, 
-Numbers={OldStyle},
-Ligatures={Common}]{Palatino Linotype}
-\setsansfont[Mapping=tex-text, Scale=1.25,
-%Ligatures={Common}, 
-Colour=AA0000]{YanoneKaffeesatz-Regular}%{Open Sans-Bold}
-\setmonofont[Mapping=tex-text]{inconsolata}	
+% See: https://tex.stackexchange.com/a/50593
+\setmainfont[BoldFont       = texgyrepagella-bold.otf,
+						 ItalicFont     = texgyrepagella-italic.otf ,
+      			 BoldItalicFont = texgyrepagella-bolditalic.otf]{texgyrepagella-regular.otf}
+\setsansfont[Scale=1.25, Colour=AA0000]{YanoneKaffeesatz-Regular}
+% \setsansfont[Colour=AA0000]{Fira Sans}
+% \setsansfont[]{Fira Mono}
+\defaultfontfeatures{
+    Path = /usr/share/texmf-dist/fonts/opentype/public/fontawesome/ }
+\usepackage{fontawesome} % Ditto
 
 %% Custom hanging indent for vita items
-\def\ind{\hangindent=1 true cm \hangafter=1 \vspace{.5em} \noindent}
+%\def\ind{\hangindent=1 true cm \hangafter=1 \vspace{.5em} \noindent}
+\def\ind{\hangindent=1 true cm \hangafter=1 \noindent}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -335,7 +332,8 @@ Colour=AA0000]{YanoneKaffeesatz-Regular}%{Open Sans-Bold}
 
 \begin{document}
 	
-\makeheading[\emph{Curriculum vitae}]{Grant R. McDermott}
+%\makeheading[\emph{Curriculum vitae}]{Grant R. McDermott}
+\makeheading{Grant R. McDermott}
 
 \section{contact}
 
@@ -346,41 +344,6 @@ Colour=AA0000]{YanoneKaffeesatz-Regular}%{Open Sans-Bold}
 	Eugene, \textsc{OR} 97403-1285 & \texttt{\href{http://www.grantmcdermott.com}{www.grantmcdermott.com}} \, \faGlobe
 \end{tabular*}
 
-%% NOTE: Mind where the & separators and \\ breaks are in the following
-%%       table. Table is one row made up of three parboxes. The left
-%%       parbox has address info, the middle parbox has a vertical bar,
-%%       and the right parbox has phone and electronic contact
-%%       information.
-%%
-%% MACROS: \rcollength is the width of the right column of the table
-%%             (adjust it to your liking; default is 1.85in).
-%%         \spacewidth is width of area between left and right boxes.
-%%
-%\newlength{\rcollength}\setlength{\rcollength}{1.85in}%
-%\newlength{\spacewidth}\setlength{\spacewidth}{18pt}
-%%
-%\begin{tabular}[t]{@{}p{\textwidth-\rcollength-\spacewidth}@{}p{\spacewidth}@{}p{\rcollength}}%
-%%
-%% Address box
-%\parbox{\textwidth-\rcollength-\spacewidth}{%
-%	\href{https://economics.uoregon.edu}{Department of Economics}, \\ Prince Lucien Campbell Hall, \\ 1285 University of Oregon, \\ Eugene, \textsc{OR} 97403-1285
-%}
-%%
-%&
-%% Uncomment to add a vertical bar in middle of contact information
-%%{\vrule width 0.5pt}
-%\parbox[m][5\baselineskip]{\spacewidth}{} &
-%%
-%% Non-snail-mail contact information
-%\parbox{\rcollength}{%
-%+1-805-895-7480 \, \faPhone\\
-%\texttt{\href{http://twitter.com/grant\_mcdermott}{@grant\_mcdermott}} \, \faTwitter \\
-%\texttt{\href{mailto:grantmcd@uoregon.edu}{grantmcd@uoregon.edu}} \, \faEnvelope \\
-%\texttt{\href{http://www.grantmcdermott.com}{www.grantmcdermott.com}} \, \faGlobe
-%}
-%%
-%\end{tabular}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% APPOINTMENTS
@@ -389,10 +352,6 @@ Colour=AA0000]{YanoneKaffeesatz-Regular}%{Open Sans-Bold}
 
 Assistant Professor of Economics, University of Oregon, 2017--Present.\\
 Postdoctoral Scholar, University of California Santa Barbara, 2015--2017.
-%\begin{tabularx}{\linewidth}{X r}
-%	Assistant Professor of Economics, University of Oregon & 2017--Present\\
-%	Postdoctoral Scholar, University of California Santa Barbara & 2015--2017
-%\end{tabularx}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% EDUCATION
@@ -415,8 +374,9 @@ B.Bus.Sc., Marketing, University of Cape Town, 2004.
 
 \emph{Fields and interests} 
 
-\ind Environmental and natural resource economics. Applied econometrics and data science. Uncertainty and Bayesian learning.
+\ind Environmental economics and data science
 
+%% Published
 \blankline
 
 \emph{Journal articles}
@@ -428,42 +388,31 @@ B.Bus.Sc., Marketing, University of Cape Town, 2004.
 \ind ``\href{http://dx.doi.org/10.1126/science.aao4248}{Protecting marine mammals, turtles and birds by rebuilding global fisheries.}'' With M.G. Burgess, B. Owashi, L.E. Peavey, T. Clavelle, D. Ovando, B.P. Wallace, R.L. Lewison, S.D. Gaines, and C.J. Costello.
 \textit{\textbf{Science}}, 359(6381), 1255--1258, 16 March 2018.
 
-
 \ind ``\href{http://dx.doi.org/10.1016/j.marpol.2016.12.005}{Five rules for pragmatic blue growth.}'' With %Matthew G. Burgess \emph{et al.}, 
 M.G. Burgess, M. Clemence, S.D. Gaines, and C.J. Costello.
 \textbf{\textit{Marine Policy}}, 87(2018) 331--339, January 2018.
 
-%\vspace{.5em}
 \ind  ``\href{http://dx.doi.org/10.1093/biosci/biv147}{Resolving Disputes over Ocean Calamities.}'' With M.G. Burgess. \textbf{\textit{BioScience}}, 65(12), 1115--1116, 1 December 2015.
 
 \ind  ``\href{http://dx.doi.org/10.3368/le.90.1.131}{Electricity Prices, River Temperatures and Cooling Water Scarcity.}'' With \O.A. Nilsen. \textbf{\textit{Land Economics}}, 90(1), 131--148, 1 February 2014.
 
-%\begin{bibenum}
-%    \item ``\href{http://dx.doi.org/10.1016/j.marpol.2016.12.005}{Five rules for pragmatic blue growth.}'' With %Matthew G. Burgess \emph{et al.}, 
-%    M.G. Burgess, M. Clemence, S.D. Gaines, and C.J. Costello.
-%    \textbf{\textit{Marine Policy}}, In Press.
-%    
-%    %\vspace{.5em}
-%    \item  ``\href{http://dx.doi.org/10.1093/biosci/biv147}{Resolving Disputes over Ocean Calamities.}'' With M.G. Burgess. \textbf{\textit{BioScience}}, 65(12), 1115--1116, 1 December 2015.
-%\end{bibenum}
-
+%% WPs
 \blankline
 
 \emph{Working papers}
 
-%\vspace{.5em}
-\ind ``\href{https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing}{Sceptic priors and climate consensus.}'' \textit{Under review.}
+\ind ``\href{https://grantmcdermott.com/papers/scepticpriors.pdf}{Sceptic priors and climate consensus.}'' \textit{Revised and resubmitted.}
 
-%\vspace{.5em}
-\ind ``\href{https://drive.google.com/file/d/0B6AgOxtQA9dTaWcxdHpsNE5wdjA/view?usp=sharing}{Hydro power. Market might.}''
+\ind ``\href{https://grantmcdermott.com/papers/hydro.pdf}{Hydro power. Market might.}''
 
+%% WIP
 \blankline
 
 \emph{Selected works in progress}
 
-%\vspace{.5em}
 \ind ``The value of mass information: Search in the Google era.'' With C.J. Costello and M.B. Ward.
 
+%% RCs
 \blankline
 
 \emph{Report chapters}
@@ -482,11 +431,11 @@ M.G. Burgess, M. Clemence, S.D. Gaines, and C.J. Costello.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% SEMINARS AND CONFERENCES 
 
-%\section{invited talks and conference presentations}
 \section{talks}
 
 %\textit{Including scheduled. }\\\\
 \begin{tabularx}{\linewidth}{l X }
+	2020	& Allied Social Science Association (ASSA) meetings; Reed College; Triangle Resource and Environmental Economics (TREE) seminar \\
 	2018	& University of Hawaii at Manoa; UCSB Occasional Workshop; Oregon Institute of Marine Biology \\
 	2017	& UCSB Occasional Workshop; Oregon State University; Association of Environmental and Resource Economists (AERE) Summer Conference (pre-conference workshop)\\%;  Google Earth Engine User Summit (GEEUS) \\
 	2016	& AERE Summer Conference\\%;  GEEUS \\
@@ -503,7 +452,9 @@ M.G. Burgess, M. Clemence, S.D. Gaines, and C.J. Costello.
 %\section{grants and scholarships}
 \section{grants}
 
-CenSES (Research Council of Norway \#209697), 2018
+UO Data Science Initiative (co-PI with Ed Rubin), 2019
+
+CenSES (Research Council of Norway, \#209697), 2018
 
 Professor Wilhelm Keilhaus Memorial Fund, 2014--2015
 
@@ -520,6 +471,7 @@ Norwegian Government Scholarship, 2009--2011
 
 \begin{tabularx}{\linewidth}{l X }
 	Ph.D.	& Data Science for Economists (EC 607) \\
+	M.Sc.	& Big Data in Economics (EC 510) \\
 	B.Sc.	& Environmental Economics (EC 434/534), Intermediate Microeconomic Theory (EC 311) \\
 %			& \textit{Undergraduate:} Environmental Economics (EC 434/534) \\
 %	& Guest lecturer for \href{http://www.bren.ucsb.edu/academics/documents/ESM242Syllabus_Costello.pdf}{Natural Resource Economics \& Policy (ESM 242)}. \\
@@ -531,7 +483,6 @@ Norwegian Government Scholarship, 2009--2011
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PROFESSIONAL SERVICE 
 
-%\section{professional service}
 \section{service}
 
 \emph{Refereeing}
@@ -555,19 +506,12 @@ Norwegian Government Scholarship, 2009--2011
 
 \section{non-academia}
 
-%\begin{tabularx}{\linewidth}{l X r}
-%	2017  & Lotic Labs, \textit{Consultant} & United States \\
-%	2009 	& NKC Independent Economists, \textit{Economist} & South Africa \\
-%	2008 	& Millennium Cycle for Change, \textit{Expedition member} & Trans-Africa		\\
-%	2007 	& IBM Global Financing, \textit{Field sales executive} & United Kingdom	\\
-%	2006	&	South Africa Labour Development Research Unit, \textit{Researcher} & South Africa
-%\end{tabularx}
 \begin{tabularx}{\linewidth}{l X}
 	2017  	& Lotic Labs, \textit{Consultant}, United States \\
 	2009 	& NKC Independent Economists, \textit{Economist}, South Africa \\
 	2008 	& Millennium Cycle for Change, \textit{Expedition member}, Cairo to Cape Town		\\
 	2007 	& IBM Global Financing, \textit{Field sales executive}, United Kingdom	\\
-	2006	&	South Africa Labour Development Research Unit, \textit{Researcher}, South Africa
+	2006	& South Africa Labour Development Research Unit, \textit{Researcher}, South Africa
 \end{tabularx}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -579,10 +523,16 @@ Norwegian Government Scholarship, 2009--2011
 \ind \textit{R}, Stata, Git(Hub), GIS, Python, SQL, Bash, some JavaScript and Julia. Various products within the Google Cloud Platform for handling and analysing big data (BigQuery, Compute Engine, Earth Engine, etc.)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PERSONAL
+
+%\section{personal}
+%
+%Citizenship: South Africa (US Permanent Resident)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%	LAST UPDATED
 
 \vspace{0.25in} 
-%\begin{center}\textsc{Last updated: \today} \end{center} 
 \begin{center}\textsc{Last updated: \monthyear\today} \end{center} 
 
 
