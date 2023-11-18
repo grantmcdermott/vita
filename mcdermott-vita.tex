@@ -165,17 +165,12 @@
 \newdateformat{daymonthyear}{\THEDAY{} \monthname[\THEMONTH] \THEYEAR}
 \usepackage{tabularx}
 %% FONTS
+\usepackage{fontawesome5}
 \usepackage{fontspec}
-% See: https://tex.stackexchange.com/a/50593
-\setmainfont[BoldFont       = texgyrepagella-bold.otf,
-						 ItalicFont     = texgyrepagella-italic.otf ,
-      			 BoldItalicFont = texgyrepagella-bolditalic.otf]{texgyrepagella-regular.otf}
-\setsansfont[Scale=1.25, Colour=AA0000]{YanoneKaffeesatz-Regular}
-% \setsansfont[Colour=AA0000]{Fira Sans}
-% \setsansfont[]{Fira Mono}
-\defaultfontfeatures{
-    Path = /usr/share/texmf-dist/fonts/opentype/public/fontawesome/ }
-\usepackage{fontawesome} % Ditto
+% \setmainfont[]{Fira Sans Light}
+% \setmonofont[]{Fira Sans Mono}
+% \setsansfont[Scale=1.25]{Yanone Kaffeesatz}
+\setsansfont{Yanone Kaffeesatz}
 
 %% Custom hanging indent for vita items
 \def\ind{\hangindent=1 true cm \hangafter=1 \vspace{.5em} \noindent}
@@ -217,14 +212,28 @@
 %%% SECTION HEADINGS
 
 % The section headings. Flush left in small caps down pseudo-margin.
+% GRM: Changed. Use red sans font instead of small caps.
+\usepackage{xcolor}
+\definecolor{customred}{HTML}{AA0000}
 %
 % Usage: \section{section name}
 \renewcommand{\section}[1]{\pagebreak[3]%
     \vspace{1.3\baselineskip}%
     \phantomsection\addcontentsline{toc}{section}{#1}%
+    % GRM: changed
     %\noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
-    \noindent\llap{\textsf{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
-    \vspace{-\baselineskip}\par}
+    \noindent\llap{\textsf{\color{customred}\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
+    \vspace{-\baselineskip}\par
+    }
+
+% \renewcommand{\section}{\@startsection
+%     {section}
+%     {1}
+%     {0mm}
+%     {-2ex plus -1ex minus -.2ex}
+%     {1.3ex plus .2ex}
+%     {\normalfont\Large\bfseries\sffamily}}
+
 
 %%% LISTS
 
@@ -334,22 +343,32 @@
 %\makeheading[\emph{Curriculum vitae}]{Grant R. McDermott}
 \makeheading{Grant R. McDermott}
 
+I am an economist, recently returned to the private sector after an extended
+period in academia. My interests are a mix of environmental, tech, and data
+science topics.
+
 \section{contact}
 
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill} } l r}
-	\href{https://economics.uoregon.edu}{Department of Economics}, & +1 541 346 1334 \, \faPhone\\
-	Prince Lucien Campbell Hall, & \texttt{\href{http://twitter.com/grant\_mcdermott}{@grant\_mcdermott}} \, \faTwitter \\
-	1285 University of Oregon,  & \texttt{\href{mailto:grantmcd@uoregon.edu}{grantmcd@uoregon.edu}} \, \faEnvelope \\
-	Eugene, \textsc{OR} 97403-1285 & \texttt{\href{http://www.grantmcdermott.com}{www.grantmcdermott.com}} \, \faGlobe
-\end{tabular*}
+% \begin{tabular*}{\textwidth}{@{\extracolsep{\fill} } l r}
+% 	\href{https://economics.uoregon.edu}{Department of Economics}, & +1 541 346 1334 \, \faPhone\\
+% 	Prince Lucien Campbell Hall, & \texttt{\href{http://twitter.com/grant\_mcdermott}{@grant\_mcdermott}} \, \faTwitter \\
+% 	1285 University of Oregon,  & \texttt{\href{mailto:grantmcd@uoregon.edu}{grantmcd@uoregon.edu}} \, \faEnvelope \\
+% 	Eugene, \textsc{OR} 97403-1285 & \texttt{\href{http://www.grantmcdermott.com}{www.grantmcdermott.com}} \, \faGlobe
+% \end{tabular*}
+\texttt{\href{mailto:gmcd@amazon.com}{gmcd@amazon.com}} \, \faEnvelope \\
+\texttt{\href{https://github.com/grantmcdermott}{@grantmcdermott}} \, \faGithub \\
+\texttt{\href{https://www.grantmcdermott.com}{www.grantmcdermott.com}} \, \faGlobe
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% APPOINTMENTS
+\section{employment}
 
-\section{appointments}
+Principal Economist, Amazon, 2022--Present.\\
 
-Assistant Professor of Economics, University of Oregon, 2017--Present.\\
+\section{academic}
+
+Assistant Professor of Economics, University of Oregon, 2017--2023.\\
 Postdoctoral Scholar, University of California Santa Barbara, 2015--2017.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -371,9 +390,9 @@ B.Bus.Sc., Marketing, University of Cape Town, 2004.
 
 \section{research}
 
-\textsc{Fields and interests} 
+% \textsc{Fields and interests} 
 
-\ind Environmental economics and data science
+% \ind Environmental economics and data science
 
 %% Published
 \blankline
@@ -406,10 +425,10 @@ M.G. Burgess, M. Clemence, S.D. Gaines, and C.J. Costello.
 
 \ind ``\href{https://grantmcdermott.com/papers/hydro.pdf}{Hydro power. Market might.}''
 
-%% WIP
-\blankline
+% %% WIP
+% \blankline
 
-\textsc{Selected works in progress}
+% \textsc{Selected works in progress}
 
 \ind ``The value of mass information: Search in the Google era.'' With C.J. Costello and M.B. Ward.
 
@@ -438,6 +457,7 @@ M.G. Burgess, M. Clemence, S.D. Gaines, and C.J. Costello.
 
 %\textit{Including scheduled. }\\\\
 \begin{tabularx}{\linewidth}{l X }
+    2022    & Microsoft Research \\
     2021    & Electronic Health Economics Colloquim, University of Illinois Urbana-Champaign; Monash University \\
 	2020	& Allied Social Science Association (ASSA) meetings; Reed College; Triangle Resource and Environmental Economics (TREE) seminar \\
 	2018	& University of Hawaii at Manoa; UCSB Occasional Workshop; Oregon Institute of Marine Biology \\
@@ -513,9 +533,9 @@ Norwegian Government Scholarship, 2009--2011
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% OUTSIDE ACADEMIA 
+%% Prior roles 
 
-\section{non-academia}
+\section{prior}
 
 \begin{tabularx}{\linewidth}{l X}
 	2017  	& Lotic Labs, \textit{Consultant}, United States \\
@@ -531,7 +551,8 @@ Norwegian Government Scholarship, 2009--2011
 \section{software}
 
 \vspace{-0.5em}
-\ind \textit{R}, SQL, Julia, Python, Stata, Git(Hub), Bash, and some JavaScript. Very familiar with various products in the Google Cloud Platform for handling and analysing big data (BigQuery, Compute Engine, Earth Engine, etc.)
+\ind \textit{R}, SQL, Julia, Python, Spark, Stata, Git, Bash, and some JavaScript. 
+Very familiar with cloud-based platforms for handling and analysing big data (including various AWS and GCP product suites). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PERSONAL
