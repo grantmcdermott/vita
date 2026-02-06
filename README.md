@@ -6,9 +6,9 @@ This repo contains the Typst code for my [curriculim
 vitae](http://grantmcdermott.com/vita/gmcd-vita.pdf).
 
 My Typst template was inspired by Kieran Healy's LaTex template
-((link)[https://github.com/kjhealy/kjh-vita]) and also adapts some code from
+([link](https://github.com/kjhealy/kjh-vita)) and also adapts some code from
 Xiao Yuan's Typst template
-((link)[https://typst.app/universe/package/yuan-resume]).
+([link](https://typst.app/universe/package/yuan-resume)).
 
 ## Requirements
 
