@@ -1,3 +1,5 @@
+[![CC BY 4.0][cc-by-shield]][cc-by]
+
 # Grant McDermott's CV
 
 This repo contains the Typst code for my [curriculim
