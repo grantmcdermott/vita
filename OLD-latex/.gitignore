@@ -1,0 +1,13 @@
+*.Rproj
+**/*.aux
+**/*.bbl
+**/*.blg
+**/*.fdb_latexmk
+**/*.fls
+**/*.log
+**/*.nav
+**/*.out
+**/*.synctex.gz
+**/*.toc
+**/*.snm
+**/*.xdv
