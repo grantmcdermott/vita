@@ -5,7 +5,7 @@
 This repo contains the Typst code for my [curriculim
 vitae](http://grantmcdermott.com/vita/gmcd-vita.pdf).
 
-My Typst template was inspired by Kieran Healy's LaTex template
+My Typst template was inspired by Kieran Healy's LaTeX template
 ([link](https://github.com/kjhealy/kjh-vita)) and also adapts some code from
 Xiao Yuan's Typst template
 ([link](https://typst.app/universe/package/yuan-resume)).
@@ -14,13 +14,13 @@ Xiao Yuan's Typst template
 
 One of the numerous advantages of [Typst](https://typst.app/) (over LaTeX) is
 how easy it is to define custom document layouts using simple functions. As
-such, this template requires only the base Typst installation and few external
-fonts.
+such, this template requires only the base Typst installation and a few
+external fonts.
 
 ### Typst
 
 My was CV built with [Typst CLI](https://github.com/typst/typst/releases/)
-v0.14.2, but I would think that any reasonably recent release will work fine.
+v0.14.2. But I should think that any reasonably recent release will work fine.
 
 ### Fonts
 
