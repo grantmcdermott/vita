@@ -1,34 +1,43 @@
 # Grant McDermott's CV
 
-Click [here](https://github.com/grantmcdermott/vita/blob/master/mcdermott-vita.pdf) to view in the repo. Or click [here](http://grantmcdermott.com/vita/mcdermott-vita.pdf) to view on my website.
+This repo contains the Typst code for my [curriculim
+vitae](http://grantmcdermott.com/vita/gmcd-vita.pdf).
 
-## Use
+My Typst template was inspired by Kieran Healy's LaTex template
+((link)[https://github.com/kjhealy/kjh-vita]) and also adapts some code from
+Xiao Yuan's Typst template
+((link)[https://typst.app/universe/package/yuan-resume]).
 
-There are a few pre-requisites if you'd like to adapt and use this template for
-your own CV, mostly related to some extra LaTeX packages and fonts.
+## Requirements
 
-### LaTeX packages
+One of the numerous advantages of [Typst](https://typst.app/) (over LaTeX) is
+how easy it is to define custom document layouts using simple functions. As
+such, this template requires only the base Typst installation and few external
+fonts.
 
-This template was built using TexLive. If you have installed the full TexLive
-distribution on your system, then you likely have all of the necessary packages.
-However, if you installed something more lightweight like TinyTex (which I
-personally recommend) then you will need to install a few extra libraries
-manually. In your terminal:
+### Typst
 
-```sh
-tlmgr update --self --all
-tlmgr ncctools install doi fontawesome5
-```
+My CV built with [Typst CLI](https://github.com/typst/typst/releases/) v0.14.2,
+but I would think that any reasonably recent release will work fine.
 
 ### Fonts
 
-I use some non-standard fonts for my CV, which means two things:
+I use the following fonts:
 
-1. You have to build the CV using **XeLaTex** (or LuaTeX, or some other modern LaTeX compiler that supports [fontspec](https://github.com/latex3/fontspec)). Regular pdfLaTeX builds will not work!
-2. You have to download and install the [Yanone Kaffeesatz](https://fonts.google.com/specimen/Yanone+Kaffeesatz) font family manually on your computer. (E.g. On a Mac, just click on the link above and select "Download Family". Unzip the resulting folder, click on main .ttf file, and then it should automatically add the family to your font book.)
+- [Aleygreya Sans](https://fonts.google.com/specimen/Alegreya+Sans)
+- [Yanone Kaffeesatz](https://fonts.google.com/specimen/Yanone+Kaffeesatz)
+- [Meslo Nerd Font](https://www.nerdfonts.com/)
 
-If dealing with non-standard fonts sounds like too much work, then you can
-always just comment out the relevant lines in the .tex file (search for "Yanone
-Kaffeesatz"). Once you've done this, you can probably comment out the
-`usepackage(fontspec)` line too and then just use regular pdfLaTeX, but I
-haven't tested this.
+All three should be available as system fonts and I recommend installing them
+through your package manager (e.g., `pacman` on Arch or `brew` on MacOS), so
+that Typst will automatically find and recognize them.  The first two,
+_Aleygreya Sans_ and _Yanone Kaffeesatz_, are used in the main text and section
+headers, respectively. If Typst can't find them, then it should revert to a
+default fallback (probably Calluna). I use the _Meslo Nerd Font_ for icons (URL
+link, envelope, GitHub, etc.) The fallback behaviour here is a little bit
+trickier, since I define a few convenience variables for the icons themselves.
+So I can't promise that this template will work as-is unless these nerd fonts
+are available. The good news is that the Meslo Nerd Font is easy to install and
+provides a lightweight alternative to icon libraries like Font Awesome, with the
+added benefit of integrating with a user's terminal and/or IDE.
+
