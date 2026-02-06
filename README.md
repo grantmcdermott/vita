@@ -17,8 +17,8 @@ fonts.
 
 ### Typst
 
-My CV built with [Typst CLI](https://github.com/typst/typst/releases/) v0.14.2,
-but I would think that any reasonably recent release will work fine.
+My was CV built with [Typst CLI](https://github.com/typst/typst/releases/)
+v0.14.2, but I would think that any reasonably recent release will work fine.
 
 ### Fonts
 
