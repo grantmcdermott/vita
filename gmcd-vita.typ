@@ -61,7 +61,7 @@ Adapts code from: https://github.com/Xyz-yuanhf/yuan-resume
         #set par(justify: true)
         // The SAS team is mandated to identify high-impact opportunities across Amazon's Stores and Ads businesses. 
         // - Sourced high value opportunities across Amazon's Stores and Ads businesses
-        - Developed econometric and ML models to measure the causal impact of interventions on seller, advertiser, and marketplace outcomes, informing \$100M business operations and strategic decisions
+        - Developed econometric and ML models to measure the causal impact of interventions on seller, advertiser, and marketplace outcomes, informing \$100M+ business operations and strategic decisions
         - Built and deployed analytical tools and workflows for large-scale causal measurement and AI evaluation in production settings
         - Authored technical and strategic documents and presented findings to senior leadership (VP+)
         // - Led multiple workshops on new science tooling and best practices
